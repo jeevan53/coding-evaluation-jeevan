@@ -26,29 +26,37 @@ public abstract class Organization {
 	Map<String, Name> hm = new HashMap<>();
 	public Optional<Position> hire(Name person, String title) {
 		//your code here
-		if(title != null) {
-			Employee employee = new Employee(i++,person);
-			Position position = new Position(title,employee);
-			//position filled newly
-			if(!hm.containsKey(title)) {
-				position.addDirectReport(position);
-				hm.put(title, person);
-				System.out.println(Optional.of(position));
-			}
-			else{
-				// already filled, but new hire replace position
-				position.removePosition(position);
-				hm.replace(title, person);
-				System.out.println(Optional.of(position));
-			}
-			return Optional.of(position);
+		if(person == null) {
+			throw new IllegalArgumentException("Name cannot be null");
 		}
-		//show data when you remove above return Optional.of(position);
-        // shows the people hired and replaced with new hire if already filled positions respective to title
-		for (Name Person : hm.values()) {
-			System.out.println("Person: " + Person);
+		Optional<Employee> newEmployee = Optional.of(new Employee(i++, person));
+		if(root.getTitle() == title) {
+			root.setEmployee(newEmployee);
+			return Optional.of(root);
 			}
-		System.out.println();
+		else {
+			for(Position l1: root.getDirectReports()) {
+				if(l1.getTitle() != title) {
+					for(Position l2: l1.getDirectReports()) {
+						if(l2.getTitle() != title) {
+							for(Position l3: l2.getDirectReports()) {
+								if(l3.getTitle() == title) {
+									l3.setEmployee(newEmployee);
+								}
+							}
+						}
+						else {
+							l2.setEmployee(newEmployee);
+							return Optional.of(l2);
+						}
+					}
+				}
+				else {
+					l1.setEmployee(newEmployee);
+					return Optional.of(l1);
+				}
+			}
+		}
 		 
 		return Optional.empty();
 	}
