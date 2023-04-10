@@ -38,6 +38,10 @@ public class MyOrganization extends Organization {
 		myOrg.hire(new Name("Gandalf", "Gray"), "Director Enterprise Architecture");
 		myOrg.hire(new Name("Head", "Geek"), "Director Customer Technology");
 		myOrg.hire(new Name("Jane", "Smith"), "VP Marketing");
+		myOrg.hire(new Name("Jane", "S"), "CEO");
+		myOrg.hire(new Name("Jane", "Sm"), "President");
+		myOrg.hire(new Name("Jane", "Smi"), "CEO");
+		myOrg.hire(new Name("Jane", "Smit"), "CEO");
 		myOrg.hire(new Name("Jim", "Jones"), "VP Sales");
 		myOrg.hire(new Name("Bean", "Counter"), "VP Finance");
 		myOrg.hire(new Name("Maya", "Liebman"), "CIO");
